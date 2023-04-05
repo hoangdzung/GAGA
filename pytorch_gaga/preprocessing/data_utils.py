@@ -235,6 +235,8 @@ def load_graph(dataset_name='amazon', raw_dir='~/.dgl/', train_size=0.4, val_siz
     if dataset_name in ['amazon', 'yelp', 'mimic']:
         fraud_data = fraud_dataset.FraudDataset(dataset_name, train_size=train_size, val_size=val_size,
                                                 random_seed=seed, force_reload=force_reload)
+    elif os.path.isfile(dataset_name + '.bin'):
+        fraud_data = dgl.load_graphs(dataset_name + '.bin')[0]
     # elif dataset_name in ['BF10M']:
     #     fraud_data = baidu_dataset.BaiduFraudDataset(dataset_name, raw_dir=raw_dir,
     #                                                  train_size=train_size, val_size=val_size,
