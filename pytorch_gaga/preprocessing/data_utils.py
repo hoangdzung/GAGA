@@ -6,6 +6,7 @@ import math
 from collections import namedtuple
 from sklearn.cluster import KMeans
 from tqdm import tqdm
+import os 
 
 from data import fraud_dataset, data_helper
 
