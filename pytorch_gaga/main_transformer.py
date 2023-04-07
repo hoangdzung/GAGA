@@ -214,8 +214,10 @@ if __name__ == "__main__":
                         help='Which gpu to use 0/1/..., -1 using only cpu')
     parser.add_argument('--n_workers', type=int, default=0,
                         help='Number of extra processes for dataloader.')
-    parser.add_argument('--n_runs', type=int, default=1,
-                        help='Repeat the training n times.')
+    # parser.add_argument('--n_runs', type=int, default=1,
+    #                     help='Repeat the training n times.')
+    parser.add_argument('--seeds', nargs="+", type=int,
+                        help='Random seeds')
 
     # todo (yuchen): migrate to yaml configuration
     args = vars(parser.parse_args())
@@ -228,14 +230,14 @@ if __name__ == "__main__":
 
     # multiple runs
     result_list = []
-    seeds = [123456, 123, 456, 42, 52, 62, 72]
-    for i in range(args['n_runs']):
+    # seeds = [123456, 123, 456, 42, 52, 62, 72]
+    for seed in args['seeds']:
         
-        random.seed(seeds[i])
-        np.random.seed(seeds[i])
-        torch.manual_seed(seeds[i])
-        torch.cuda.manual_seed(seeds[i])
-        torch.cuda.manual_seed_all(seeds[i])
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
 
         res = train(args, data, dataset, i)
         result_list.append(res)
