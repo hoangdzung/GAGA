@@ -133,13 +133,13 @@ def eval_model(y_true, y_prob, y_pred):
     # print(metrics.classification_report(y_true=labels, y_pred=preds, digits=4))
 
     # this is the normal precision and recall we seen so many times
-    precision_true_class = metrics.precision_score(true_labels, predicted_labels, labels=[1], average=None)[0]
-    recall_true_class = metrics.recall_score(true_labels, predicted_labels, labels=[1], average=None)[0]
-    f1_true_class = metrics.f1_score(true_labels, predicted_labels, labels=[1], average=None)[0]
+    precision_true_class = metrics.precision_score(y_true, y_pred, labels=[1], average=None)[0]
+    recall_true_class = metrics.recall_score(y_true, y_pred, labels=[1], average=None)[0]
+    f1_true_class = metrics.f1_score(y_true, y_pred, labels=[1], average=None)[0]
 
-    precision_false_class = metrics.precision_score(true_labels, predicted_labels, labels=[0], average=None)[0]
-    recall_false_class = metrics.recall_score(true_labels, predicted_labels, labels=[0], average=None)[0]
-    f1_false_class = metrics.f1_score(true_labels, predicted_labels, labels=[0], average=None)[0]
+    precision_false_class = metrics.precision_score(y_true, y_pred, labels=[0], average=None)[0]
+    recall_false_class = metrics.recall_score(y_true, y_pred, labels=[0], average=None)[0]
+    f1_false_class = metrics.f1_score(y_true, y_pred, labels=[0], average=None)[0]
 
     DataType = namedtuple('Metrics', ['f1_macro', 'f1_micro', 'f1_true_class', 'precision_true_class',
                                       'recall_true_class', 'f1_false_class', 'precision_false_class', 'recall_false_class',

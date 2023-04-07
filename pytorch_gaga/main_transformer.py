@@ -244,4 +244,4 @@ if __name__ == "__main__":
 
     # calculate average value and standard deviation
     print(result_list)
-    metrics.calc_mean_sd(result_list)
+    # metrics.calc_mean_sd(result_list)
