@@ -132,13 +132,29 @@ def eval_model(y_true, y_prob, y_pred):
 
     # print(metrics.classification_report(y_true=labels, y_pred=preds, digits=4))
 
-    DataType = namedtuple('Metrics', ['f1_binary_1', 'f1_binary_0', 'f1_macro', 'auc_gnn',
-                                      'gmean_gnn', 'recall_1', 'precision_1', 'ap_gnn',
-                                      'best_roc_thres', 'best_pr_thres', 'recall_macro'])
-    results = DataType(f1_binary_1=f1_binary_1, f1_binary_0=f1_binary_0, f1_macro=f1_macro,
-                       auc_gnn=auc_gnn, gmean_gnn=gmean_gnn, ap_gnn=ap_gnn,
-                       recall_1=recall_1, precision_1=precision_1, recall_macro=recall_macro,
-                       best_pr_thres=best_pr_thres, best_roc_thres=best_roc_thres)
+    # this is the normal precision and recall we seen so many times
+    precision_true_class = metrics.precision_score(true_labels, predicted_labels, labels=[1], average=None)[0]
+    recall_true_class = metrics.recall_score(true_labels, predicted_labels, labels=[1], average=None)[0]
+    f1_true_class = metrics.f1_score(true_labels, predicted_labels, labels=[1], average=None)[0]
+
+    precision_false_class = metrics.precision_score(true_labels, predicted_labels, labels=[0], average=None)[0]
+    recall_false_class = metrics.recall_score(true_labels, predicted_labels, labels=[0], average=None)[0]
+    f1_false_class = metrics.f1_score(true_labels, predicted_labels, labels=[0], average=None)[0]
+
+    DataType = namedtuple('Metrics', ['f1_macro', 'f1_micro', 'f1_true_class', 'precision_true_class',
+                                      'recall_true_class', 'f1_false_class', 'precision_false_class', 'recall_false_class',
+                                      'auc_gnn'])
+    results = DataType(f1_macro=f1_macro, f1_micro=f1_micro, f1_true_class=f1_true_class,
+                       precision_true_class=precision_true_class, recall_true_class=recall_true_class, f1_false_class=f1_false_class,
+                       precision_false_class=precision_false_class, recall_false_class=recall_false_class, auc_gnn=auc_gnn)
+
+    # DataType = namedtuple('Metrics', ['f1_binary_1', 'f1_binary_0', 'f1_macro', 'auc_gnn',
+    #                                   'gmean_gnn', 'recall_1', 'precision_1', 'ap_gnn',
+    #                                   'best_roc_thres', 'best_pr_thres', 'recall_macro'])
+    # results = DataType(f1_binary_1=f1_binary_1, f1_binary_0=f1_binary_0, f1_macro=f1_macro,
+    #                    auc_gnn=auc_gnn, gmean_gnn=gmean_gnn, ap_gnn=ap_gnn,
+    #                    recall_1=recall_1, precision_1=precision_1, recall_macro=recall_macro,
+    #                    best_pr_thres=best_pr_thres, best_roc_thres=best_roc_thres)
 
     return results
 
