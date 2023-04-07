@@ -186,7 +186,7 @@ def prepare_data(args, add_self_loop=False):
     g = load_graph(dataset_name=args['dataset'], raw_dir=args['base_dir'],
                    train_size=args['train_size'], val_size=args['val_size'],
                    seed=args['seed'], norm=args['norm_feat'],
-                   force_reload=args['force_reload'])
+                   force_reload=args['force_reload'], ignore_rels=args['graph_id'])
     
     relations = list(g.etypes)
     if add_self_loop is True:
@@ -228,7 +228,7 @@ def prepare_data(args, add_self_loop=False):
 
 
 def load_graph(dataset_name='amazon', raw_dir='~/.dgl/', train_size=0.4, val_size=0.1,
-               seed=717, norm=True, force_reload=False, verbose=True) -> dict:
+               seed=717, norm=True, force_reload=False, verbose=True, graph_id=0) -> dict:
     """Loading dataset from dgl's FraudDataset.
     这里的设计目前是冗余且不必要的,可以直接使用dgl的异构图来处理.
     为了兼容后期的数据集, 将每一张图单独处理
@@ -243,8 +243,8 @@ def load_graph(dataset_name='amazon', raw_dir='~/.dgl/', train_size=0.4, val_siz
     #                                                  train_size=train_size, val_size=val_size,
     #                                                  random_seed=seed, force_reload=force_reload)
 
-    g = fraud_data[0]
-
+    g = fraud_data[graph_id]
+        
     # Feature tensor dtpye is float64, change it to float32
     if norm and (dataset_name not in ['BF10M']):
         h = data_helper.row_normalize(g.ndata['feature'], dtype=np.float32)

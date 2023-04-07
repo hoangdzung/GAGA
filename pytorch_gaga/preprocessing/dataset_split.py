@@ -92,6 +92,8 @@ if __name__ == "__main__":
                         help='Directory for loading graph data.')
     parser.add_argument('--save_dir', type=str, default='seq_data',
                         help='Directory for saving the processed sequence data.')
+    parser.add_argument('--graph_id', type=int, default=0,
+                        help='graph_id')
     # BF10M base_dir = /home/work/wangyuchen09/Projects/fraud_detection/dataset/fraud_20211209
     args = vars(parser.parse_args())
     # 转化fanoutsw为int list

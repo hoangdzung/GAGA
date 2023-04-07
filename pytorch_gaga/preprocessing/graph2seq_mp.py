@@ -74,6 +74,8 @@ if __name__ == "__main__":
                         help='Directory for saving the processed sequence data.')
     parser.add_argument('--n_workers', type=int, default=1,
                         help='Using n processes.')
+    parser.add_argument('--graph_id', type=int, default=0,
+                        help='graph_id')
     # BF10M base_dir = /home/work/wangyuchen09/Projects/fraud_detection/dataset/fraud_20211209
     args = vars(parser.parse_args())
     print(args)
