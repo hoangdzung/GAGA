@@ -186,7 +186,7 @@ def prepare_data(args, add_self_loop=False):
     g = load_graph(dataset_name=args['dataset'], raw_dir=args['base_dir'],
                    train_size=args['train_size'], val_size=args['val_size'],
                    seed=args['seed'], norm=args['norm_feat'],
-                   force_reload=args['force_reload'], ignore_rels=args['graph_id'])
+                   force_reload=args['force_reload'], graph_id=args['graph_id'])
     
     relations = list(g.etypes)
     if add_self_loop is True:
