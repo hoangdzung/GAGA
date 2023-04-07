@@ -196,11 +196,9 @@ def train(args, data, dataset, run_id):
                                                device=eval_device)
         results = metrics.eval_model(te_true, te_prob, te_pred)
 
-    return [results.f1_macro, results.auc_gnn, results.gmean_gnn,
-            results.precision_1, results.recall_1, results.ap_gnn,
-            results.f1_binary_1, results.f1_binary_0, results.recall_macro,
-            stopper.best_ep]
-
+    return [results.auc_gnn, results.f1_macro, results.f1_micro,
+            results.f1_true_class, results.precision_true_class, results.recall_true_class,
+            results.f1_false_class, results.precision_false_class, results.recall_false_class]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="GAGA")
