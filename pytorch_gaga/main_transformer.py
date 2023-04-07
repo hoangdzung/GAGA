@@ -239,7 +239,7 @@ if __name__ == "__main__":
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
-        res = train(args, data, dataset, i)
+        res = train(args, data, dataset, seed)
         result_list.append(res)
 
     # calculate average value and standard deviation
