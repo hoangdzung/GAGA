@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 import numpy as np
+import random
 import os
 from tqdm import tqdm
 
@@ -229,7 +230,15 @@ if __name__ == "__main__":
 
     # multiple runs
     result_list = []
+    seeds = [123456, 123, 456, 42, 52, 62, 72]
     for i in range(args['n_runs']):
+        
+        random.seed(seeds[i])
+        np.random.seed(seeds[i])
+        torch.manual_seed(seeds[i])
+        torch.cuda.manual_seed(seeds[i])
+        torch.cuda.manual_seed_all(seeds[i])
+
         res = train(args, data, dataset, i)
         result_list.append(res)
 
