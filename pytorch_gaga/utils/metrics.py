@@ -143,10 +143,11 @@ def eval_model(y_true, y_prob, y_pred):
 
     DataType = namedtuple('Metrics', ['f1_macro', 'f1_micro', 'f1_true_class', 'precision_true_class',
                                       'recall_true_class', 'f1_false_class', 'precision_false_class', 'recall_false_class',
-                                      'auc_gnn'])
+                                      'auc_gnn',  'best_roc_thres', 'best_pr_thres'])
     results = DataType(f1_macro=f1_macro, f1_micro=f1_micro, f1_true_class=f1_true_class,
                        precision_true_class=precision_true_class, recall_true_class=recall_true_class, f1_false_class=f1_false_class,
-                       precision_false_class=precision_false_class, recall_false_class=recall_false_class, auc_gnn=auc_gnn)
+                       precision_false_class=precision_false_class, recall_false_class=recall_false_class, auc_gnn=auc_gnn,
+                       best_roc_thres=best_roc_thres, best_pr_thres=best_pr_thres)
 
     # DataType = namedtuple('Metrics', ['f1_binary_1', 'f1_binary_0', 'f1_macro', 'auc_gnn',
     #                                   'gmean_gnn', 'recall_1', 'precision_1', 'ap_gnn',
