@@ -117,12 +117,13 @@ if __name__ == "__main__":
     for pid in range(n_workers):
         st = pid * block_size
         ed = min((pid + 1) * block_size, n_nodes)
-        p = mp.Process(target=graph2seq, args=(pid, args, st, ed, nids[st:ed], graph_data, sequence_array))
-        procs.append(p)
-        p.start()     
+        graph2seq(pid, args, st, ed, nids[st:ed], graph_data, sequence_array)
+    #     p = mp.Process(target=graph2seq, args=(pid, args, st, ed, nids[st:ed], graph_data, sequence_array))
+    #     procs.append(p)
+    #     p.start()     
     
-    for p in procs:
-        p.join()
+    # for p in procs:
+    #     p.join()
 
     sequence_array.flush()
     
